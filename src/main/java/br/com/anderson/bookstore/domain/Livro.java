@@ -1,12 +1,24 @@
 package br.com.anderson.bookstore.domain;
 
-public class Livro {
+import java.io.Serializable;
 
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+
+public class Livro implements Serializable {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String titulo;
     private String nome_autor;
     private String texto;
 
+    @ManyToOne
+    @JoinColumn(name = "categoria_id")
     private Categoria categoria;
 
     public Livro(Integer id, String titulo, String nome_autor, String texto, Categoria categoria) {
@@ -82,5 +94,4 @@ public class Livro {
         return true;
     }
 
-    
 }
